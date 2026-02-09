@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Rotaract Club of Hyderabad East</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --rotaract-blue: #7BA7BC;
+            --rotaract-pink: #C8536C;
+            --pastel-mint: #A8D5BA;
+            --pastel-peach: #F4C4A0;
+            --pastel-lavender: #B8A9C9;
+            --light-bg: #F8F9FA;
+            --text-primary: #2C2C2E;
+            --text-secondary: #6C6C70;
+        }
+        
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background: var(--light-bg); color: var(--text-primary); }
+        
+        /* Reuse navbar, footer, and common styles from about.html */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 1.5rem 5%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); z-index: 1000; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+        .logo-section { display: flex; align-items: center; gap: 1.5rem; }
+        .club-logo { height: 50px; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--text-primary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--rotaract-blue); }
+        .cta-button { background: linear-gradient(135deg, var(--rotaract-blue), var(--pastel-mint)); color: white; padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; }
+        
+        .page-hero { padding: 140px 5% 80px; background: linear-gradient(135deg, rgba(123, 167, 188, 0.1), rgba(168, 213, 186, 0.1)); text-align: center; }
+        .page-hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, var(--rotaract-pink), var(--pastel-peach)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .projects-container { max-width: 1400px; margin: 0 auto; padding: 5rem 5%; }
+        .filter-tabs { display: flex; gap: 1rem; justify-content: center; margin-bottom: 4rem; flex-wrap: wrap; }
+        .filter-tab { padding: 0.8rem 2rem; background: white; border: 2px solid var(--rotaract-blue); color: var(--rotaract-blue); border-radius: 50px; cursor: pointer; transition: all 0.3s; font-weight: 600; }
+        .filter-tab:hover, .filter-tab.active { background: var(--rotaract-blue); color: white; }
+        
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2.5rem; }
+        .project-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); transition: all 0.3s; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12); }
+        .project-image { height: 250px; background: linear-gradient(135deg, var(--rotaract-blue), var(--pastel-mint)); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; font-weight: 800; }
+        .project-content { padding: 2rem; }
+        .project-badge { display: inline-block; padding: 0.4rem 1rem; background: linear-gradient(135deg, var(--rotaract-pink), var(--pastel-peach)); color: white; border-radius: 20px; font-size: 0.85rem; margin-bottom: 1rem; }
+        .project-card h3 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--text-primary); }
+        .project-card p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem; }
+        .project-stats { display: flex; gap: 2rem; margin-bottom: 1.5rem; }
+        .stat { text-align: center; }
+        .stat-num { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, var(--rotaract-blue), var(--pastel-mint)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-label { font-size: 0.85rem; color: var(--text-secondary); }
+        .project-btn { display: inline-block; padding: 0.8rem 2rem; background: var(--rotaract-blue); color: white; text-decoration: none; border-radius: 50px; transition: all 0.3s; }
+        .project-btn:hover { background: var(--pastel-mint); }
+        
+        .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .mobile-menu-btn span { width: 25px; height: 3px; background: var(--text-primary); }
+        
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px); background: white; flex-direction: column; padding: 3rem; }
+            .nav-links.active { left: 0; }
+            .mobile-menu-btn { display: flex; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .logo-section { gap: 0.8rem; }
+            .club-logo { height: 35px !important; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-section">
+                <img src="/mnt/user-data/uploads/1.png" alt="Rotary Logo" class="club-logo">
+                <img src="/mnt/user-data/uploads/2.png" alt="District 3150" class="club-logo">
+                <img src="/mnt/user-data/uploads/3.png" alt="RCHE" class="club-logo" style="height: 60px;">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html#join" class="cta-button">Join the Club</a></li>
+            </ul>
+            <div class="mobile-menu-btn"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <h1>Our Projects</h1>
+        <p>Making a lasting impact through meaningful service initiatives</p>
+    </section>
+
+    <div class="projects-container">
+        <div class="filter-tabs">
+            <div class="filter-tab active">All Projects</div>
+            <div class="filter-tab">Community Service</div>
+            <div class="filter-tab">Education</div>
+            <div class="filter-tab">Healthcare</div>
+            <div class="filter-tab">Environment</div>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">EDU</div>
+                <div class="project-content">
+                    <span class="project-badge">Education</span>
+                    <h3>Digital Literacy Drive</h3>
+                    <p>Providing computer education to underprivileged students, bridging the digital divide and empowering youth with essential tech skills.</p>
+                    <div class="project-stats">
+                        <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Students</div></div>
+                        <div class="stat"><div class="stat-num">12</div><div class="stat-label">Schools</div></div>
+                        <div class="stat"><div class="stat-num">6</div><div class="stat-label">Months</div></div>
+                    </div>
+                    <a href="#" class="project-btn">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, var(--rotaract-pink), var(--pastel-peach));">HLT</div>
+                <div class="project-content">
+                    <span class="project-badge">Healthcare</span>
+                    <h3>Health Awareness Campaign</h3>
+                    <p>Conducting free health checkups and awareness sessions in rural communities, focusing on preventive healthcare and wellness.</p>
+                    <div class="project-stats">
+                        <div class="stat"><div class="stat-num">1000+</div><div class="stat-label">Beneficiaries</div></div>
+                        <div class="stat"><div class="stat-num">8</div><div class="stat-label">Villages</div></div>
+                        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Months</div></div>
+                    </div>
+                    <a href="#" class="project-btn">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, var(--pastel-mint), var(--pastel-lavender));">ENV</div>
+                <div class="project-content">
+                    <span class="project-badge">Environment</span>
+                    <h3>Green Hyderabad Initiative</h3>
+                    <p>Large-scale tree plantation and lake cleanup drives to create a sustainable and eco-friendly environment for future generations.</p>
+                    <div class="project-stats">
+                        <div class="stat"><div class="stat-num">5000+</div><div class="stat-label">Trees</div></div>
+                        <div class="stat"><div class="stat-num">15</div><div class="stat-label">Lakes</div></div>
+                        <div class="stat"><div class="stat-num">1</div><div class="stat-label">Year</div></div>
+                    </div>
+                    <a href="#" class="project-btn">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">COM</div>
+                <div class="project-content">
+                    <span class="project-badge">Community Service</span>
+                    <h3>Hunger Relief Program</h3>
+                    <p>Distributing nutritious meals to homeless individuals and underprivileged communities across Hyderabad East.</p>
+                    <div class="project-stats">
+                        <div class="stat"><div class="stat-num">10000+</div><div class="stat-label">Meals</div></div>
+                        <div class="stat"><div class="stat-num">20</div><div class="stat-label">Areas</div></div>
+                        <div class="stat"><div class="stat-num">Ongoing</div><div class="stat-label">Duration</div></div>
+                    </div>
+                    <a href="#" class="project-btn">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, var(--pastel-peach), var(--pastel-lavender));">SKL</div>
+                <div class="project-content">
+                    <span class="project-badge">Professional Development</span>
+                    <h3>Skill Development Workshops</h3>
+                    <p>Empowering youth with vocational skills, soft skills training, and career guidance for better employment opportunities.</p>
+                    <div class="project-stats">
+                        <div class="stat"><div class="stat-num">300+</div><div class="stat-label">Trainees</div></div>
+                        <div class="stat"><div class="stat-num">25</div><div class="stat-label">Workshops</div></div>
+                        <div class="stat"><div class="stat-num">8</div><div class="stat-label">Months</div></div>
+                    </div>
+                    <a href="#" class="project-btn">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, var(--rotaract-pink), var(--pastel-mint));">WTR</div>
+                <div class="project-content">
+                    <span class="project-badge">Community Service</span>
+                    <h3>Water For All</h3>
+                    <p>Installing water purification systems and ensuring access to clean drinking water in underserved neighborhoods.</p>
+                    <div class="project-stats">
+                        <div class="stat"><div class="stat-num">2000+</div><div class="stat-label">Families</div></div>
+                        <div class="stat"><div class="stat-num">10</div><div class="stat-label">Localities</div></div>
+                        <div class="stat"><div class="stat-num">Ongoing</div><div class="stat-label">Status</div></div>
+                    </div>
+                    <a href="#" class="project-btn">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        mobileMenuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+    </script>
+</body>
+</html>
